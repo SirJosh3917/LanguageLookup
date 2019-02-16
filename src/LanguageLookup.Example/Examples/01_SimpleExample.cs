@@ -21,7 +21,7 @@ namespace LanguageLookup.Example.Examples
 			[Value("Hello, World!", Groups.English)] string Greeting { get; }
 		}
 
-		public void Run()
+		public void Run(IPrinter printer)
 		{
 			// we assign a Loader to a variable because creating a new loader is an expensive operation.
 			// loading a language is *also* an expensive operation, so you should seek to minimize these operations as much as possible.
@@ -38,7 +38,7 @@ namespace LanguageLookup.Example.Examples
 				.Load(Groups.English);
 
 			// write the greeting to the screen
-			Console.WriteLine(language.Greeting);
+			printer.Print(language.Greeting);
 		}
 	}
 }

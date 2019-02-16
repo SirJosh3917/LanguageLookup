@@ -13,12 +13,22 @@ namespace LanguageLookup.Example
 
 	public interface IExample
 	{
-		void Run();
+		void Run(IPrinter printer);
+	}
+
+	public interface IPrinter
+	{
+		void Print(string str);
+	}
+
+	public class ConsolePrinter : IPrinter
+	{
+		public void Print(string str) => Console.WriteLine(str);
 	}
 
 	internal class Program
 	{
-		private static void Main(string[] args)
+		private static void Main()
 		{
 			var examples = typeof(Program).Assembly
 				.GetTypes()
@@ -27,11 +37,13 @@ namespace LanguageLookup.Example
 				.Select(type => (IExample)Activator.CreateInstance(type))
 				.ToArray();
 
+			var cp = new ConsolePrinter();
+
 			for (var i = 0; i < examples.Length; i++)
 			{
 				Console.WriteLine($"\tRunning example {i}:");
 
-				examples[i].Run();
+				examples[i].Run(cp);
 
 				Console.WriteLine();
 			}

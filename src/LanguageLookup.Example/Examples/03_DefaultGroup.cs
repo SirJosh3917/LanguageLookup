@@ -21,7 +21,7 @@ namespace LanguageLookup.Example.Examples
 			string Hello { get; }
 		}
 
-		public void Run()
+		public void Run(IPrinter printer)
 		{
 			var loader = new DefaultLoader<ILanguage>();
 
@@ -32,10 +32,10 @@ namespace LanguageLookup.Example.Examples
 				.Load(Groups.Spanish);
 
 			// writes "Hello!" even though we never put English on it
-			Console.WriteLine(english.Hello);
+			printer.Print(english.Hello);
 
 			// properly writes ¡Hola!
-			Console.WriteLine(spanish.Hello);
+			printer.Print(spanish.Hello);
 		}
 	}
 }

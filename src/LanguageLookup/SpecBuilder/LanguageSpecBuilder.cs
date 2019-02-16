@@ -39,6 +39,8 @@ namespace LanguageLookup
 
 			public void Write(HandleLanguageItem handleItem)
 			{
+				if (handleItem == null) throw new ArgumentNullException(nameof(handleItem));
+
 				foreach (var item in _properties)
 				{
 					var result = handleItem(item);
@@ -68,7 +70,7 @@ namespace LanguageLookup
 						MethodAttributes.HideBySig |
 						MethodAttributes.SpecialName,
 					returnType: property.PropertyType,
-					parameterTypes: new Type[] { }
+					parameterTypes: Type.EmptyTypes
 				);
 
 				var il = getMethod.GetILGenerator();

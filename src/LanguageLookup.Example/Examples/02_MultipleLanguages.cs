@@ -24,7 +24,7 @@ namespace LanguageLookup.Example.Examples
 			string ThankYou { get; }
 		}
 
-		public void Run()
+		public void Run(IPrinter printer)
 		{
 			var loader = new DefaultLoader<ILanguage>();
 
@@ -43,19 +43,19 @@ namespace LanguageLookup.Example.Examples
 			// making our code very clean
 
 			// Thank you!
-			PrintThankYou(english);
+			PrintThankYou(english, printer);
 
 			// ¡Gracias!
-			PrintThankYou(spanish);
+			PrintThankYou(spanish, printer);
 
 			// ありがと
-			PrintThankYou(japanese);
+			PrintThankYou(japanese, printer);
 		}
 
-		public void PrintThankYou(ILanguage language)
+		public void PrintThankYou(ILanguage language, IPrinter printer)
 
 			// now i don't have to know what language i'm speaking
 			// i can just trust the interface to have the language implemented correctly
-			=> Console.WriteLine(language.ThankYou);
+			=> printer.Print(language.ThankYou);
 	}
 }

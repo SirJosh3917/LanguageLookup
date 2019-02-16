@@ -11,7 +11,7 @@ namespace LanguageLookupTests
 		[Group("_")]
 		public interface ILang
 		{
-			[Value("_")]
+			[Value("underscore")]
 			[Value("A", "a")]
 			[Value("B", "b")]
 			string Char { get; }
@@ -22,21 +22,21 @@ namespace LanguageLookupTests
 		{
 			var loader = new DefaultLoader<ILang>();
 
-			var _ = loader.Load("_");
+			var lang_ = loader.Load("_");
 
-			_.Char
+			lang_.Char
 				.Should()
-				.Be("_");
+				.Be("underscore");
 
-			var a = loader.Load("a");
+			var langA = loader.Load("a");
 
-			a.Char
+			langA.Char
 				.Should()
 				.Be("A");
 
-			var b = loader.Load("b");
+			var langB = loader.Load("b");
 
-			b.Char
+			langB.Char
 				.Should()
 				.Be("B");
 		}
